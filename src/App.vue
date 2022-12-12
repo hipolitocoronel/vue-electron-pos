@@ -15,7 +15,7 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
+          <v-btn block @click="logout">
             Salir
           </v-btn>
         </div>
@@ -53,5 +53,10 @@ export default {
       { title: 'Ajustes', icon: 'mdi-sort-variant' },
     ],
   }),
+  methods: {
+    logout() {
+      this.$router.push("login")
+    }
+  }
 };
 </script>
