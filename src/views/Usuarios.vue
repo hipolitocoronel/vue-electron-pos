@@ -3,7 +3,7 @@
         <!--ENCABEZADO DE USUARIOS-->
         <v-row class="mt-2">
             <v-col class="secondary--text font-weight-medium"
-                >Listado de usuarios</v-col
+                ><v-subheader>Usuarios</v-subheader></v-col
             >
             <v-col class="d-flex justify-end">
                 <v-btn
