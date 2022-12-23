@@ -1,22 +1,15 @@
 <template>
-  <div>
-    <h1>Bienvenido {{                     user                     }}</h1>
-  </div>
+    <div>
+        <Alert/>
+    </div>
 </template>
 
 <script>
-import axios from "axios"
+import Alert from "@/components/Alert.vue";
 export default {
-  name: 'Home',
-  data: () => ({
-    user: null
-  }),
-  async mounted() {
-    const base_url = "http://localhost:3301/users"
-
-    const { data } = await axios.get(base_url)
-
-    this.user = data[1].username
-  }
-}
+    name: "Home",
+    components: { Alert },
+    data: () => ({}),
+    async mounted() {},
+};
 </script>
