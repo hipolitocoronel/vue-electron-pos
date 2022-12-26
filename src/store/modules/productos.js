@@ -1,9 +1,10 @@
-export const users = {
+export const productos = {
   namespaced: true,
   state: () => ({
     dialog: false,
-    editUser: false,
-    users: [],
+    editProducto: false,
+    productos: [],
+    search: "",
 
     //datos para el formulario
     id: "",
@@ -13,15 +14,19 @@ export const users = {
     state: false,
   }),
   mutations: {
+    setSearch(state, search) {
+      state.search = search;
+    },
     setDialog(state, dialog) {
       state.dialog = dialog;
     },
-    setEditUser(state, editUser) {
-      state.editUser = editUser;
+    setEditProducto(state, editProducto) {
+      state.editProducto = editProducto;
     },
-    setUsers(state, users) {
-      state.users = users;
+    setProductos(state, productos) {
+      state.productos = productos;
     },
+    /*
     updateUser(state, user) {
       state.users = state.users.map((u) => (u.id === user.id ? user : u));
     },
@@ -53,18 +58,22 @@ export const users = {
     },
     setState(state, stat) {
       state.state = stat;
-    },
+    },*/
   },
   actions: {
+    setSearch({ commit }, search) {
+      commit("setSearch", search);
+    },
     setDialog({ commit }, dialog) {
       commit("setDialog", dialog);
     },
-    setEditUser({ commit }, editUser) {
-      commit("setEditUser", editUser);
+    setEditProducto({ commit }, editProducto) {
+      commit("setEditProducto", editProducto);
     },
-    setUsers({ commit }, users) {
-      commit("setUsers", users);
+    setProductos({ commit }, productos) {
+      commit("setProductos", productos);
     },
+    /*
     updateUser({ commit }, user) {
       commit("updateUser", user);
     },
@@ -90,18 +99,20 @@ export const users = {
     },
     setState({ commit }, state) {
       commit("setState", state);
-    },
+    },*/
   },
   getters: {
+    search: (state) => state.search,
     dialog: (state) => state.dialog,
-    editUser: (state) => state.editUser,
-    users: (state) => state.users,
-
+    editProducto: (state) => state.editProducto,
+    productos: (state) => state.productos,
+    /*
     //datos formulario
     id: (state) => state.id,
     username: (state) => state.username,
     name: (state) => state.name,
     password: (state) => state.password,
     state: (state) => state.state,
+  */
   },
 };
