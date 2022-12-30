@@ -79,7 +79,7 @@ export default {
     items: [
       { title: "Inicio", icon: "mdi-home", to: "/" },
       { title: "Ventas", icon: "mdi-cart" },
-      { title: "Compras", icon: "mdi-shopping" },
+      { title: "Caja", icon: "mdi-shopping", to: "/caja" },
       { title: "Productos", icon: "mdi-archive", to: "/productos" },
       { title: "Usuarios", icon: "mdi-account", to: "/usuarios" },
       { title: "Reportes", icon: "mdi-book-open" },
