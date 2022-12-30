@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-tabs color="black" class="mt-2" background-color="transparent">
-      <v-tab>Productos</v-tab>
-      <v-tab>Inventario</v-tab>
-      <v-tab>Proveedores</v-tab>
+      <v-tab class="text-capitalize">Productos</v-tab>
+      <v-tab class="text-capitalize">Inventario</v-tab>
+      <v-tab class="text-capitalize">Proveedores</v-tab>
 
       <v-tab-item class="grey lighten-5">
         <v-row class="mt-2" align="center" no-gutters>
@@ -12,7 +12,6 @@
               v-model="search"
               filled
               rounded
-              small
               label="Buscar producto por código, descripción o categoría"
               prepend-inner-icon="mdi-magnify"
               dense

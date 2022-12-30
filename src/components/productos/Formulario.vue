@@ -21,11 +21,12 @@
                                     prepend-inner-icon="mdi-key"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="8">
+                            <v-col cols="12" md="12">
                                 <v-text-field
+                                    v-model="codigo"
                                     label="Código"
                                     prepend-inner-icon="mdi-barcode"
-                                    hint="- Lo utilizarás para poder ingresar"
+                                    hint="Si no tenes un código, el sistema lo autogera por vos"
                                     persistent-hint
                                     filled
                                 ></v-text-field>
@@ -34,16 +35,22 @@
                         <v-row no-gutters>
                             <v-col>
                                 <v-textarea
+                                    v-model="descripcion"
                                     filled
                                     name="input-7-4"
+                                    :rules="[
+                                        (v) => !!v || 'Decripcion requerida',
+                                    ]"
                                     rows="1"
-                                    label="Descripcion"
+                                    label="Descripción"
                                 ></v-textarea>
                             </v-col>
                         </v-row>
                         <v-row no-gutters>
                             <v-col cols="12" md="6">
                                 <v-text-field
+                                    v-model="stock"
+                                    type="number"
                                     label="Stock"
                                     prepend-inner-icon="mdi-numeric"
                                     filled
@@ -52,23 +59,48 @@
                             </v-col>
                             <v-col cols="12" md="6">
                                 <v-text-field
-                                    label="Precio"
-                                    prepend-inner-icon="mdi-cash"
+                                    v-model="stockMinimo"
+                                    label="Stock mínimo"
+                                    type="number"
+                                    hint="Te informaremos cuando llegues a esta cantidad"
+                                    persistent-hint
+                                    prepend-inner-icon="mdi-counter"
                                     filled
                                 ></v-text-field>
                             </v-col>
                         </v-row>
                         <v-row no-gutters>
-                            <Categoria />
+                            <v-col cols="12" md="6">
+                                <v-text-field
+                                    v-model="precioCompra"
+                                    class="mr-2"
+                                    label="Precio de compra"
+                                    prepend-inner-icon="mdi-cash"
+                                    filled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-text-field
+                                    v-model="precio"
+                                    label="Precio de venta"
+                                    prepend-inner-icon="mdi-cash-multiple"
+                                    filled
+                                ></v-text-field>
+                            </v-col>
                         </v-row>
                         <v-row no-gutters>
-                            <v-file-input
-                                accept="image/*"
-                                label="Imagen"
-                                filled
-                                :prepend-icon="null"
-                                prepend-inner-icon="mdi-camera"
-                            ></v-file-input>
+                            <v-col cols="12" md="6">
+                                <Categoria class="mr-2" />
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-file-input
+                                    accept="image/*"
+                                    label="Imagen"
+                                    filled
+                                    :prepend-icon="null"
+                                    prepend-inner-icon="mdi-camera"
+                                ></v-file-input>
+                            </v-col>
                         </v-row>
                     </v-tab-item>
                     <v-tab-item> permisos </v-tab-item>
@@ -76,10 +108,8 @@
             </div>
             <v-divider></v-divider>
             <div class="pa-5 form-actions">
-                <v-btn text @click="setDialog(false)">cancelar</v-btn>
-                <v-btn color="secondary darken-2" @click="setDialog(false)"
-                    >guardar</v-btn
-                >
+                <v-btn text @click="resetForm()">cancelar</v-btn>
+                <v-btn color="secondary darken-2" @click="">guardar</v-btn>
             </div>
         </v-form>
     </div>
@@ -119,43 +149,70 @@ export default {
         errorMsj: "",
     }),
     computed: {
-        ...mapGetters("productos", ["dialog", "editProducto"]),
+        ...mapGetters("productos", ["dialog", "editProducto", "id"]),
         //datos del formulario
-        username: {
+        codigo: {
             get() {
-                return this.$store.getters["users/username"];
+                return this.$store.getters["productos/codigo"];
             },
-            set(newUsername) {
-                this.$store.dispatch("users/setUsername", newUsername || "");
+            set(newCodigo) {
+                this.$store.dispatch("productos/setCodigo", newCodigo || "");
             },
         },
-        name: {
+        descripcion: {
             get() {
-                return this.$store.getters["users/name"];
+                return this.$store.getters["productos/descripcion"];
             },
-            set(newName) {
-                this.$store.dispatch("users/setName", newName || "");
+            set(newDescripcion) {
+                this.$store.dispatch(
+                    "productos/setDescripcion",
+                    newDescripcion || ""
+                );
             },
         },
-        password: {
+        stock: {
             get() {
-                return this.$store.getters["users/password"];
+                return this.$store.getters["productos/stock"];
             },
-            set(newPassword) {
-                this.$store.dispatch("users/setPassword", newPassword || "");
+            set(newStock) {
+                this.$store.dispatch("productos/setStock", newStock || "");
             },
         },
-        state: {
+        stockMinimo: {
             get() {
-                return this.$store.getters["users/state"];
+                return this.$store.getters["productos/stockMinimo"];
             },
-            set(newState) {
-                this.$store.dispatch("users/setState", newState || true);
+            set(newStock) {
+                this.$store.dispatch("productos/setStockMinimo", newStock || "");
+            },
+        },
+        precio: {
+            get() {
+                return this.$store.getters["productos/precio"];
+            },
+            set(newPrecio) {
+                this.$store.dispatch("productos/setPrecio", newPrecio || "");
+            },
+        },
+        precioCompra: {
+            get() {
+                return this.$store.getters["productos/precioCompra"];
+            },
+            set(newPrecio) {
+                this.$store.dispatch("productos/setPrecioCompra", newPrecio || "");
+            },
+        },
+        imagen: {
+            get() {
+                return this.$store.getters["productos/imagen"];
+            },
+            set(newImagen) {
+                this.$store.dispatch("productos/setImagen", newImagen || "");
             },
         },
     },
     methods: {
-        ...mapActions("productos", ["setDialog", "setEditProducto"]),
+        ...mapActions("productos", ["resetForm"]),
         guardarUsuario() {
             if (this.$refs.form.validate()) {
                 const newUser = {
