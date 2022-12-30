@@ -1,8 +1,9 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, screen } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Scheme must be registered before the app is ready
@@ -11,10 +12,13 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 async function createWindow() {
+  const size = screen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: size.width,
+    height: size.height,
+    autoHideMenuBar: true,
+    icon: __dirname + "../assets/icons/icon.png",
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone
@@ -23,6 +27,7 @@ async function createWindow() {
       contextIsolation: false
     }
   })
+
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -58,6 +63,7 @@ app.on('ready', async () => {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS_DEVTOOLS)
+      console.log('vue extension installed');
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString())
     }
