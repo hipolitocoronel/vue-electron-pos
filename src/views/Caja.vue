@@ -4,13 +4,33 @@
             <v-tab class="text-capitalize">Caja actual</v-tab>
             <v-tab class="text-capitalize">Cajas anteriores</v-tab>
             <v-tab-item class="grey lighten-5">
-                <v-row no-gutters class="my-3">
-                    <v-col>
-                        <v-btn color="secondary darken-2 mr-2" small>Abrir Caja</v-btn>
-                        <v-btn color="black" outlined small>Cerrar Caja</v-btn>
-                        <v-spacer></v-spacer>
-                        <v-btn color="black" icon>x</v-btn>
-                    </v-col>
+                <v-row no-gutters class="my-3 align-center">
+                    <v-btn
+                        color="secondary darken-2"
+                        class="mr-2"
+                        small
+                        disabled
+                        >Abrir Caja</v-btn
+                    >
+                    <v-btn color="black" class="mr-2" outlined small
+                        >Cerrar Caja</v-btn
+                    >
+                    <v-btn
+                        color="success"
+                        text
+                        class="text-capitalize mr-2"
+                        small
+                        ><v-icon class="mr-1">mdi-cash-plus</v-icon>Agregar
+                        dinero</v-btn
+                    >
+                    <v-btn color="error" text class="text-capitalize" small>
+                        <v-icon class="mr-1">mdi-cash-minus</v-icon> Retirar
+                        dinero</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                    <v-btn color="secondary" icon
+                        ><v-icon>mdi-cog</v-icon></v-btn
+                    >
                 </v-row>
                 <v-row no-gutters>
                     <v-col>
@@ -24,14 +44,24 @@
                     </v-col>
                 </v-row>
             </v-tab-item>
-            <v-tab-item> cajas anteriores </v-tab-item>
+            <v-tab-item>
+                <AbrirCaja />
+                <CerrarCaja />
+            </v-tab-item>
         </v-tabs>
     </div>
 </template>
 
 <script>
+import AbrirCaja from "@/components/caja/AbrirCaja.vue";
+import CerrarCaja from "@/components/caja/CerrarCaja.vue";
+
 export default {
     name: "Caja",
+    components: {
+        AbrirCaja,
+        CerrarCaja,
+    },
     data() {
         return {
             headers: [

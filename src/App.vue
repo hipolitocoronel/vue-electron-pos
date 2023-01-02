@@ -28,7 +28,7 @@
       </v-navigation-drawer>
 
       <!--NAVBAR-->
-      <v-app-bar app>
+      <v-app-bar app class="navbar">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Punto de venta</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -98,4 +98,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.navbar{
+  border-top: 1px solid #ddd !important;
+  border-bottom: 1px solid #ccc !important;
+}
+</style>
