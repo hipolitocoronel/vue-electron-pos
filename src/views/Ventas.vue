@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters style="height: 95%">
+  <v-row no-gutters style="height: 95%" class="grey lighten-4">
     <v-col cols="9" style="height: 100%">
       <div class="ma-5 d-flex align-center">
         <v-btn icon class="grey darken-3 mr-2" @click="$router.push('inicio')"
@@ -20,7 +20,7 @@
         <v-tab class="text-capitalize">Populares</v-tab>
         <v-tab class="text-capitalize">Lacteos</v-tab>
         <v-tab class="text-capitalize">Fiambres</v-tab>
-        <v-tab-item class="grey lighten-5">
+        <v-tab-item class="grey lighten-4">
           <div class="productos-container">
             <div class="producto-item white">
               <div>
@@ -137,7 +137,7 @@
       style="height: 100%">
       <div class="d-flex justify-space-between align-center">
         <p class="text-subtitle-1 mb-0 font-weight-bold">Nueva venta</p>
-        <p class="mb-0 red--text">{{ moment().format('lll') }} hs</p>
+        <p class="mb-0 green--text">{{ moment().format('lll') }} hs</p>
       </div>
       <div class="carrito-container mt-8">
         <div class="carrito-item grey lighten-4 py-3 px-5">
@@ -147,11 +147,11 @@
           </div>
           <div class="acciones">
             <div class="d-flex align-center" style="gap: 10px">
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-minus</v-icon></v-btn
               >
               <span class="text-h6">3</span>
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-plus</v-icon></v-btn
               >
             </div>
@@ -170,11 +170,11 @@
           </div>
           <div class="acciones">
             <div class="d-flex align-center" style="gap: 10px">
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-minus</v-icon></v-btn
               >
               <span class="text-h6">3</span>
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-plus</v-icon></v-btn
               >
             </div>
@@ -193,11 +193,11 @@
           </div>
           <div class="acciones">
             <div class="d-flex align-center" style="gap: 10px">
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-minus</v-icon></v-btn
               >
               <span class="text-h6">3</span>
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-plus</v-icon></v-btn
               >
             </div>
@@ -216,11 +216,11 @@
           </div>
           <div class="acciones">
             <div class="d-flex align-center" style="gap: 10px">
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-minus</v-icon></v-btn
               >
               <span class="text-h6">3</span>
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-plus</v-icon></v-btn
               >
             </div>
@@ -239,11 +239,11 @@
           </div>
           <div class="acciones">
             <div class="d-flex align-center" style="gap: 10px">
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-minus</v-icon></v-btn
               >
               <span class="text-h6">3</span>
-              <v-btn icon x-small class="amber white--text"
+              <v-btn icon x-small class="amber lighten-1 white--text"
                 ><v-icon>mdi-plus</v-icon></v-btn
               >
             </div>
@@ -274,7 +274,7 @@
           <v-spacer></v-spacer>
           <span class="font-weight-bold text-h5">$960.00</span>
         </div>
-        <p class="text-body-2 mb-1 text-end red--text">Vaciar carrito</p>
+        <p class="text-body-2 mb-1 text-end grey--text text--darken-2">Vaciar carrito</p>
       </div>
 
       <div>
