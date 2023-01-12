@@ -3,7 +3,6 @@
 import { app, protocol, BrowserWindow, screen } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-const path = require('path')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Scheme must be registered before the app is ready
@@ -11,23 +10,21 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function createWindow() {
-  const size = screen.getPrimaryDisplay().workAreaSize;
+async function createWindow () {
+  const size = screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
   const win = new BrowserWindow({
     width: size.width,
     height: size.height,
     autoHideMenuBar: true,
-    icon: __dirname + "../assets/icons/icon.png",
+    icon: __dirname + '../assets/icons/icon.png',
     webPreferences: {
-      
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: true,
       contextIsolation: false
     }
   })
-
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -63,7 +60,7 @@ app.on('ready', async () => {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS_DEVTOOLS)
-      console.log('vue extension installed');
+      console.log('vue extension installed')
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString())
     }
