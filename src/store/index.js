@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { users } from "./modules/users";
 import { productos } from "./modules/productos";
+import { caja } from "./modules/caja";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
   modules: {
     users,
     productos,
+    caja
   },
   strict: true,
 });

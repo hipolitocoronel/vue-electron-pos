@@ -9,10 +9,15 @@
                         color="secondary darken-2"
                         class="mr-2"
                         small
-                        disabled
+                        @click="setDialogAbrir(true)"
                         >Abrir Caja</v-btn
                     >
-                    <v-btn color="black" class="mr-2" outlined small
+                    <v-btn
+                        color="black"
+                        class="mr-2"
+                        outlined
+                        small
+                        @click="setDialogCerrar(true)"
                         >Cerrar Caja</v-btn
                     >
                     <v-btn
@@ -20,6 +25,7 @@
                         text
                         class="text-capitalize mr-2"
                         small
+                        @click="setDialogAgregar(true)"
                         ><v-icon class="mr-1">mdi-cash-plus</v-icon>Agregar
                         dinero</v-btn
                     >
@@ -32,6 +38,7 @@
                         ><v-icon>mdi-cog</v-icon></v-btn
                     >
                 </v-row>
+
                 <v-row no-gutters>
                     <v-col>
                         <v-data-table
@@ -44,24 +51,28 @@
                     </v-col>
                 </v-row>
             </v-tab-item>
-            <v-tab-item>
-                <AbrirCaja />
-                <CerrarCaja />
-            </v-tab-item>
+            <v-tab-item> </v-tab-item>
         </v-tabs>
+
+        <AbrirCaja />
+        <CerrarCaja />
+        <AgregarDinero />
     </div>
 </template>
 
 <script>
 import AbrirCaja from "@/components/caja/AbrirCaja.vue";
+import AgregarDinero from "@/components/caja/AgregarDinero.vue";
 import CerrarCaja from "@/components/caja/CerrarCaja.vue";
+import { mapActions } from "vuex";
 
 export default {
     name: "Caja",
     components: {
-        AbrirCaja,
-        CerrarCaja,
-    },
+    AbrirCaja,
+    CerrarCaja,
+    AgregarDinero
+},
     data() {
         return {
             headers: [
@@ -109,6 +120,9 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        ...mapActions("caja", ["setDialogAbrir", "setDialogCerrar" , "setDialogAgregar"]),
     },
 };
 </script>
