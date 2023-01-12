@@ -39,28 +39,28 @@
 </template>
 
 <script>
-import Formulario from "@/components/productos/Formulario.vue";
-import TablaProductos from "@/components/productos/TablaProductos.vue";
-import { mapActions } from "vuex";
+import Formulario from '@/components/productos/Formulario.vue'
+import TablaProductos from '@/components/productos/TablaProductos.vue'
+import { mapActions } from 'vuex'
 
 export default {
-  name: "Productos",
+  name: 'ProductosView',
   components: { TablaProductos, Formulario },
   data: () => ({}),
   computed: {
     search: {
-      get() {
-        return this.$store.getters["productos/search"];
+      get () {
+        return this.$store.getters['productos/search']
       },
-      set(newSeach) {
-        this.$store.dispatch("productos/setSearch", newSeach);
-      },
-    },
+      set (newSeach) {
+        this.$store.dispatch('productos/setSearch', newSeach)
+      }
+    }
   },
   methods: {
-    ...mapActions("productos", ["setDialog"]),
-  },
-};
+    ...mapActions('productos', ['setDialog'])
+  }
+}
 </script>
 
 <style scoped></style>

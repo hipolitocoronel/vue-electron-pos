@@ -21,24 +21,25 @@
 </template>
 
 <script>
-import Formulario from "@/components/usuarios/Formulario.vue";
-import TablaUsuarios from "@/components/usuarios/TablaUsuarios.vue";
-import userService from "@/services/user";
-import { mapActions } from "vuex";
+import Formulario from '@/components/usuarios/Formulario.vue'
+import TablaUsuarios from '@/components/usuarios/TablaUsuarios.vue'
+import userService from '@/services/user'
+import { mapActions } from 'vuex'
 export default {
-  name: "Usuarios",
+  name: 'UsuariosView',
   components: { TablaUsuarios, Formulario },
 
   data: () => ({}),
-  mounted() {
+  mounted () {
     userService.getUsers().then((users) => {
-      this.setUsers(users.items);
-    });
+      this.setUsers(users.items)
+    })
   },
+
   methods: {
-    ...mapActions("users", ["setUsers", "setDialog"]),
-  },
-};
+    ...mapActions('users', ['setUsers', 'setDialog'])
+  }
+}
 </script>
 
 <style scoped></style>
