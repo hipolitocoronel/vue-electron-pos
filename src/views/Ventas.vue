@@ -137,7 +137,7 @@
       style="height: 100%">
       <div class="d-flex justify-space-between align-center">
         <p class="text-subtitle-1 mb-0 font-weight-bold">Nueva venta</p>
-        <p class="mb-0 green--text">{{ moment().format('lll') }} hs</p>
+        <p class="mb-0 red--text">{{ moment().format('lll') }} hs</p>
       </div>
       <div class="carrito-container mt-8">
         <div class="carrito-item grey lighten-4 py-3 px-5">
@@ -274,7 +274,9 @@
           <v-spacer></v-spacer>
           <span class="font-weight-bold text-h5">$960.00</span>
         </div>
-        <p class="text-body-2 mb-1 text-end grey--text text--darken-2">Vaciar carrito</p>
+        <p class="text-body-2 mb-1 text-end grey--text text--darken-2">
+          Vaciar carrito
+        </p>
       </div>
 
       <div>
