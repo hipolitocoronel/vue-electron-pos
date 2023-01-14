@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters style="height: 95%" class="grey lighten-4">
+  <v-row no-gutters style="height: 100%" class="grey lighten-4">
     <v-col cols="9" style="height: 100%">
       <div class="ma-5 d-flex align-center">
         <v-btn icon class="grey darken-3 mr-2" @click="$router.push('inicio')"
