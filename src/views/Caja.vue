@@ -10,6 +10,7 @@
             class="mr-2"
             small
             @click="setDialogAbrir(true)"
+            :disable="cajaActual"
             >Abrir Caja</v-btn
           >
           <v-btn
@@ -36,10 +37,10 @@
         </v-row>
 
         <v-row no-gutters>
-          <v-col>
+          <v-col class="overflow-auto">
             <v-data-table
               :headers="headers"
-              :items="cajaActual.movimientos"
+              :items="cajaActual?.movimientos || []"
               class="grey lighten-5"
               hide-default-footer
               no-data-text="Sin datos disponibles para mostrar">
@@ -63,6 +64,10 @@
 
               <template v-slot:[`item.medioPago`]="{ item }">
                 {{ item.medioPago ? item.medioPago : '-' }}
+              </template>
+
+              <template v-slot:[`item.observaciones`]="{ item }">
+                {{ item.observaciones ? item.observaciones : '-' }}
               </template>
             </v-data-table>
           </v-col>
@@ -98,7 +103,7 @@ export default {
         {
           text: 'ID',
           align: 'start',
-          sortable: true,
+          sortable: false,
           value: 'id',
         },
         {
@@ -106,36 +111,63 @@ export default {
           align: 'start',
           sortable: true,
           value: 'created',
+          width: '100px',
         },
         {
           text: 'Hora',
           align: 'start',
           sortable: true,
           value: 'updated',
+          width: '100px',
         },
         {
           text: 'Descripción',
           align: 'start',
           sortable: true,
           value: 'tipo',
+          width: '150px',
+        },
+        {
+          text: 'Descuento',
+          align: 'start',
+          sortable: true,
+          value: 'descuento',
+          width: '110px',
         },
         {
           text: 'Importe total',
           align: 'start',
           sortable: true,
           value: 'importeTotal',
+          width: '120px',
         },
         {
           text: 'Medio de pago',
           align: 'start',
           sortable: true,
           value: 'medioPago',
+          width: '130px',
+        },
+        {
+          text: 'Cliente',
+          align: 'start',
+          sortable: false,
+          value: 'cliente',
+          width: '160px',
         },
         {
           text: 'Usuario',
           align: 'start',
-          sortable: true,
+          sortable: false,
           value: 'expand.user.name',
+          width: '180px',
+        },
+        {
+          text: 'Observaciones',
+          align: 'start',
+          sortable: false,
+          value: 'observaciones',
+          width: '300px',
         },
       ],
 
@@ -159,3 +191,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+table {
+  overflow-x: hidden;
+}
+</style>

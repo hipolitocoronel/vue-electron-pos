@@ -49,7 +49,9 @@
       <!--MAIN CONTENT-->
       <v-main style="height: 100%" class="grey lighten-5">
         <router-view
-          :class="$router.currentRoute.name !== 'ventas' ? 'mx-5' : ''" />
+          :class="
+            $router.currentRoute.name !== 'ventas' ? 'mx-5 overflow-x-auto' : ''
+          " />
 
         <!--FOOTER-->
         <v-card

@@ -18,6 +18,9 @@ export const caja = {
     setSaldoInicial(state, saldoInicial) {
       state.saldoInicial = saldoInicial;
     },
+    agregarMovimiento(state, movimiento) {
+      state.cajaActual.movimientos.unshift(movimiento);
+    },
 
     setDialogAbrir(state, dialog) {
       state.dialogAbrir = dialog;
@@ -35,11 +38,30 @@ export const caja = {
       const movimientos = await cajaServices.movimientos();
 
       const caja = {
-        cajaActual,
+        data: cajaActual,
         movimientos,
       };
 
       commit('setCajaActual', caja);
+    },
+
+    async setAgregarDinero({ commit }, { importe, observaciones, user }) {
+      const data = {
+        tipo: 'Ingreso de dinero',
+        importeTotal: importe,
+        caja: this.state.caja.cajaActual.data.id,
+        observaciones,
+        user,
+      };
+
+      const idMovimiento = await cajaServices.agregarDinero(data);
+      const movimiento = await cajaServices.getMovimiento(idMovimiento);
+
+      return movimiento;
+    },
+
+    agregarMovimiento({ commit }, movimiento) {
+      commit('agregarMovimiento', movimiento);
     },
     setSaldoInicial({ commit }, saldoInicial) {
       commit('setSaldoInicial', saldoInicial);

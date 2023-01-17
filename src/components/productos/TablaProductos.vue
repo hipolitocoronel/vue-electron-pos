@@ -105,7 +105,6 @@ export default {
   },
   async created() {
     const returnedProductos = await productosService.getProductos();
-    console.log('productos: ', returnedProductos);
     this.setProductos(returnedProductos.items);
   },
   methods: {

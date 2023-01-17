@@ -1,9 +1,5 @@
-// import axios from 'axios';
 import PocketBase from 'pocketbase';
 const pb = new PocketBase('http://127.0.0.1:8090');
-
-// const baseUrl =
-//  'http://localhost:8090/api/collections/movimientos/records?expand=users';
 
 const cajaActual = async () => {
   const cajaData = await pb
@@ -16,9 +12,21 @@ const cajaActual = async () => {
 const movimientos = async () => {
   const movimientosData = await pb
     .collection('movimientos')
-    .getFullList(2000, { expand: 'user' });
+    .getFullList(2000, { expand: 'user', sort: '-created' });
 
   return movimientosData;
 };
 
-export default { cajaActual, movimientos };
+const getMovimiento = async (id) => {
+  const movimiento = await pb.collection('movimientos').getOne(id, { expand: 'user' });
+
+  return movimiento;
+}
+
+const agregarDinero = async (data) => {
+  const {id} = await pb.collection("movimientos").create(data);
+
+  return id;
+}
+
+export default { cajaActual, movimientos, getMovimiento ,agregarDinero };

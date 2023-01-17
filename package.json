@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "serve": "concurrently \"npm run init-server\" \"vue-cli-service serve\"",
+    "serve-mac": "concurrently \"npm run init-server-mac\" \"vue-cli-service serve\"",
     "build": "vue-cli-service build",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "init-server": "pocketbase.exe serve",
-    "start": "concurrently \"npm run init-server\" \"npm run electron:serve\""
+    "init-server-mac": "./pocketbase serve",
+    "start": "concurrently \"npm run init-server\" \"npm run electron:serve\"",
+    "start-mac": "concurrently \"npm run init-server-mac\" \"npm run electron:serve\""
   },
   "main": "background.js",
   "dependencies": {
