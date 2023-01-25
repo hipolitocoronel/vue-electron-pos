@@ -6,26 +6,25 @@
         <v-text-field
           name="username"
           label="Nombre de usuario"
+          :rules="[v => !!v || 'El nombre de usuario es requerido']"
           id="email"
           v-model="username"
-          required
-        ></v-text-field>
+          required></v-text-field>
         <v-text-field
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :type="showPassword ? 'text' : 'password'"
           name="password"
+          :rules="[v => !!v || 'La contraseña es requerida']"
           label="Contraseña"
           counter
           @click:append="showPassword = !showPassword"
           v-model="password"
-          required
-        ></v-text-field>
+          required></v-text-field>
 
         <v-fade-transition>
           <div
             v-if="errorMessage"
-            class="error-container red lighten-1 text-center my-4 py-2 rounded"
-          >
+            class="error-container red lighten-1 text-center my-4 py-2 rounded">
             <span class="white--text">{{ errorMessage }}</span>
           </div>
         </v-fade-transition>
@@ -36,78 +35,73 @@
           :loading="authLoading"
           >Ingresar</v-btn
         >
-        <div class="mt-4">
-          <a to="/login" class="text-decoration-none blue-grey--text"
-            >Olvidaste tu contraseña?</a
-          >
-        </div>
       </v-form>
     </v-card>
   </div>
 </template>
 
 <script>
-  import authService from '@/services/auth';
-  import { mapActions, mapGetters } from 'vuex';
+import authService from '@/services/auth';
+import { mapActions, mapGetters } from 'vuex';
 
-  export default {
-    name: 'Login',
-    data: () => ({
-      username: '',
-      password: '',
-      showPassword: false,
-      errorMessage: '',
-      authLoading: false,
-    }),
-    computed: {
-      ...mapGetters(['userLogged']),
+export default {
+  name: 'Login',
+  data: () => ({
+    username: '',
+    password: '',
+    showPassword: false,
+    errorMessage: '',
+    authLoading: false,
+  }),
+  computed: {
+    ...mapGetters(['userLogged']),
+  },
+  methods: {
+    ...mapActions(['setUserLogged']),
+    login() {
+      if (
+        (!this.username && !this.password) ||
+        !this.username ||
+        !this.password
+      ) {
+        this.errorMessage = 'Ambos campos son obligatorios';
+        setTimeout(() => (this.errorMessage = ''), 5000);
+      } else {
+        const dataUser = {
+          username: this.username,
+          password: this.password,
+        };
+
+        this.authLoading = true;
+
+        authService
+          .login(dataUser)
+          .then(userLogged => {
+            this.username = '';
+            this.password = '';
+            this.setUserLogged(userLogged);
+          })
+          .catch(error => {
+            console.log('error', error);
+            this.errorMessage = error.response.data;
+            setTimeout(() => (this.errorMessage = ''), 5000);
+          })
+          .finally(() => (this.authLoading = false));
+      }
     },
-    methods: {
-      ...mapActions(['setUserLogged']),
-      login() {
-        if (
-          (!this.username && !this.password) ||
-          !this.username ||
-          !this.password
-        ) {
-          this.errorMessage = 'Ambos campos son obligatorios';
-          setTimeout(() => (this.errorMessage = ''), 5000);
-        } else {
-          const dataUser = {
-            username: this.username,
-            password: this.password,
-          };
-
-          this.authLoading = true;
-
-          authService
-            .login(dataUser)
-            .then((userLogged) => {
-              this.username = '';
-              this.password = '';
-              this.setUserLogged(userLogged);
-            })
-            .catch((error) => {
-              console.log('error', error);
-              this.errorMessage = error.response.data;
-              setTimeout(() => (this.errorMessage = ''), 5000);
-            })
-            .finally(() => (this.authLoading = false));
-        }
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>
-  .container-login {
-    display: grid;
-    place-items: center;
-    height: 100%;
-  }
+.container-login {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
 
-  .form-container {
-    min-width: 400px;
-    padding: 30px;
-  }
+.form-container {
+  min-width: 400px;
+  padding: 30px;
+}
 </style>

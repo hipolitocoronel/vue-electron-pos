@@ -56,6 +56,7 @@ export default {
       'setDialogAgregar',
       'setAgregarDinero',
       'agregarMovimiento',
+      'getCajaActualData',
     ]),
     async agregarDinero() {
       const data = {
@@ -74,6 +75,7 @@ export default {
       // reset data
       this.importe = '';
       this.observaciones = '';
+      await this.getCajaActualData();
     },
   },
 };

@@ -35,7 +35,9 @@ export const caja = {
   actions: {
     async getCajaActualData({ commit }) {
       const cajaActual = await cajaServices.cajaActual();
-      const movimientos = await cajaServices.movimientos();
+      if (cajaActual.fechaCierre) return commit('setCajaActual', null);
+
+      const movimientos = await cajaServices.movimientos(cajaActual.id);
 
       const caja = {
         data: cajaActual,
@@ -60,7 +62,16 @@ export const caja = {
       return movimiento;
     },
 
-    agregarMovimiento({ commit }, movimiento) {
+    async agregarMovimiento({ commit }, movimiento) {
+      const cajaActual = this.state.caja.cajaActual.data;
+      const saldoActual = cajaActual.saldoFinal;
+      const saldoActualizado = saldoActual + movimiento.importeTotal;
+
+      await cajaServices.actualizarSaldoCaja({
+        ...cajaActual,
+        saldoFinal: saldoActualizado,
+      });
+
       commit('agregarMovimiento', movimiento);
     },
     setSaldoInicial({ commit }, saldoInicial) {

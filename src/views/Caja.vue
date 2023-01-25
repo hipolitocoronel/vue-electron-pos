@@ -10,7 +10,7 @@
             class="mr-2"
             small
             @click="setDialogAbrir(true)"
-            :disable="cajaActual"
+            :disabled="cajaActual != null"
             >Abrir Caja</v-btn
           >
           <v-btn
